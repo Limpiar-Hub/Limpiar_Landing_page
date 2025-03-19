@@ -77,12 +77,15 @@ export function Navbar() {
           </nav>
 
           {/* Get Started Button */}
-          <Link
-            href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS?backgroundColor=%23ffffff&primaryColor=%23178af6ff&buttonText=Schedule+Meeting&showCalendarTitle=true&showCalendarDescription=true&showCalendarDetails=true&default=true"
-            className="hidden md:inline-flex bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium"
-          >
-            Get Started
-          </Link>
+          <a
+  href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS?backgroundColor=%23ffffff&primaryColor=%23178af6ff&buttonText=Schedule+Meeting&showCalendarTitle=true&showCalendarDescription=true&showCalendarDetails=true&default=true"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="hidden md:inline-flex bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium"
+>
+  Get Started
+</a>
+
           {/* Mobile Navigation */}
           <Sheet>
             <SheetTrigger asChild>
@@ -113,12 +116,15 @@ export function Navbar() {
                 <Link href="/social-impact" className="text-lg font-medium text-gray-700 hover:text-blue-600">
                   Social Impact
                 </Link>
-                <Link
-                  href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS?backgroundColor=%23ffffff&primaryColor=%23178af6ff&buttonText=Schedule+Meeting&showCalendarTitle=true&showCalendarDescription=true&showCalendarDetails=true&default=true"
-                  className="hidden md:inline-flex bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium"
-                >
-                  Get Started
-                </Link>
+                <a
+  href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS?backgroundColor=%23ffffff&primaryColor=%23178af6ff&buttonText=Schedule+Meeting&showCalendarTitle=true&showCalendarDescription=true&showCalendarDetails=true&default=true"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="hidden md:inline-flex bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium"
+>
+  Get Started
+</a>
+
               </nav>
             </SheetContent>
           </Sheet>

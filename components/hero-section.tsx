@@ -47,11 +47,16 @@ export function HeroSection() {
               className="bg-white/10 text-white placeholder:text-gray-400"
               aria-label="Business email"
             />
-            <Link href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS?backgroundColor=%23ffffff&primaryColor=%23178af6ff&buttonText=Schedule+Meeting&showCalendarTitle=true&showCalendarDescription=true&showCalendarDetails=true&default=true">
-              <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
-                Get Started
-              </Button>
-            </Link>
+           <a
+  href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS?backgroundColor=%23ffffff&primaryColor=%23178af6ff&buttonText=Schedule+Meeting&showCalendarTitle=true&showCalendarDescription=true&showCalendarDetails=true&default=true"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+    Get Started
+  </Button>
+</a>
+
           </div>
           {message && <p className="mt-4 text-sm text-gray-300">{message}</p>}
         </motion.div>

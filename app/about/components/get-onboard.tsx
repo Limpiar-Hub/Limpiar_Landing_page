@@ -21,11 +21,16 @@ export function GetOnboard() {
               exceed our clients’ expectations. From reducing chemical use to implementing advanced recycling
               techniques, every aspect of our operation is designed with sustainability at its core.
             </p>
-            <Link href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS?backgroundColor=%23ffffff&primaryColor=%23178af6ff&buttonText=Schedule+Meeting&showCalendarTitle=true&showCalendarDescription=true&showCalendarDetails=true&default=true">
-              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
-                Join Our Team
-              </Button>
-            </Link>
+            <a
+  href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS?backgroundColor=%23ffffff&primaryColor=%23178af6ff&buttonText=Schedule+Meeting&showCalendarTitle=true&showCalendarDescription=true&showCalendarDetails=true&default=true"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
+    Join Our Team
+  </Button>
+</a>
+
           </motion.div>
 
           <motion.div

@@ -22,11 +22,16 @@ export function JoinMovement() {
             managers everywhere who are redefining cleanliness and efficiency.
           </p>
           <div>
-            <Link href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS?backgroundColor=%23ffffff&primaryColor=%23178af6ff&buttonText=Schedule+Meeting&showCalendarTitle=true&showCalendarDescription=true&showCalendarDetails=true&default=true">
-              <Button size="lg" variant="secondary" className="text-blue-500 hover:text-blue-600">
-                Get Started
-              </Button>
-            </Link>
+          <a
+  href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS?backgroundColor=%23ffffff&primaryColor=%23178af6ff&buttonText=Schedule+Meeting&showCalendarTitle=true&showCalendarDescription=true&showCalendarDetails=true&default=true"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <Button size="lg" variant="secondary" className="text-blue-500 hover:text-blue-600">
+    Get Started
+  </Button>
+</a>
+
           </div>
         </motion.div>
       </div>

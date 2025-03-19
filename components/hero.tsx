@@ -35,13 +35,15 @@ export function Hero() {
           className="flex w-full max-w-sm items-center space-x-2"
         >
           <Input type="email" placeholder="Enter your business email" />
-          <Link
-            href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS?backgroundColor=%23ffffff&primaryColor=%23178af6ff&buttonText=Schedule+Meeting&showCalendarTitle=true&showCalendarDescription=true&showCalendarDetails=true&default=true"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center"
-          >
-            <Search className="mr-2 h-4 w-4" />
-            Search
-          </Link>
+          <a
+  href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS?backgroundColor=%23ffffff&primaryColor=%23178af6ff&buttonText=Schedule+Meeting&showCalendarTitle=true&showCalendarDescription=true&showCalendarDetails=true&default=true"
+  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <Search className="mr-2 h-4 w-4" />
+  Search
+</a>
         </motion.div>
       </div>
     </section>
