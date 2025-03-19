@@ -5,12 +5,15 @@ export async function POST(request: Request) {
   const { name, email } = await request.json()
 
   const transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: "smtp.hostinger.com", // Use Hostinger's SMTP server
+    port: 465, // Use port 465 for SSL or 587 for TLS
+    secure: true, // True for 465, false for 587
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
+      user: process.env.EMAIL_USER, // Your Hostinger email
+      pass: process.env.EMAIL_PASS, // Your Hostinger email password
     },
   })
+  
 
   const mailOptions = {
     from: process.env.EMAIL_USER,
