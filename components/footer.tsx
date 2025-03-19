@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
@@ -26,7 +25,11 @@ export function Footer() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name: "Subscriber", email }), // Use "Subscriber" as the name
+        body: JSON.stringify({
+          name: "Subscriber",
+          email,
+          recipient: "helpdesk@uselimpiar.online", // Ensure email goes to this address
+        }),
       })
 
       if (!response.ok) {
@@ -77,7 +80,7 @@ export function Footer() {
           <div>
             <h3 className="font-semibold mb-4">Contact</h3>
             <ul className="space-y-2">
-              <li className="text-sm text-gray-600">Email: hello@limpiar.online</li>
+              <li className="text-sm text-gray-600">Email: helpdesk@uselimpiar.online</li>
               <li className="text-sm text-gray-600">Phone: (833) 546-7427</li>
             </ul>
           </div>
@@ -127,4 +130,3 @@ export function Footer() {
     </footer>
   )
 }
-
