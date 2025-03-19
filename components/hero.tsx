@@ -36,7 +36,7 @@ export function Hero() {
         >
           <Input type="email" placeholder="Enter your business email" />
           <Link
-            href="https://www.limpiar.online/landingpage"
+            href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS?backgroundColor=%23ffffff&primaryColor=%23178af6ff&buttonText=Schedule+Meeting&showCalendarTitle=true&showCalendarDescription=true&showCalendarDetails=true&default=true"
             className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center"
           >
             <Search className="mr-2 h-4 w-4" />

@@ -74,7 +74,7 @@ export function FeaturesSection() {
                   <div className="space-y-4">
                     <h2 className="text-3xl font-bold tracking-tight">{feature.title}</h2>
                     <p className="text-gray-600 leading-relaxed">{feature.description}</p>
-                    <Link href="https://limpiar.online/landingpage">
+                    <Link href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS?backgroundColor=%23ffffff&primaryColor=%23178af6ff&buttonText=Schedule+Meeting&showCalendarTitle=true&showCalendarDescription=true&showCalendarDetails=true&default=true">
                       <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
                         Get Started
                       </Button>

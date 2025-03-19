@@ -4,7 +4,7 @@ import { Suspense } from "react"
 import { LoadingSpinner } from "@/components/loading-spinner"
 
 export const metadata: Metadata = {
-  title: "Start Here - Limpiador",
+  title: "Start Here - Limpiar",
   description: "Discover the benefits of partnering with Limpiador and maximize your property's value.",
   openGraph: {
     title: "Start Here - Limpiador",
