@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Search } from "lucide-react"
-import Link from "next/link"
+
 
 import { Input } from "@/components/ui/input"
 
