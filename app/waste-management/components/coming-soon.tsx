@@ -1,7 +1,5 @@
 "use client"
 
-import type React from "react"
-
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
@@ -18,27 +16,33 @@ export function ComingSoon() {
       setMessage("Please enter a valid email.")
       return
     }
-
+  
     setLoading(true)
     setMessage("")
-
+  
     try {
-      const response = await fetch("/api/subscribe", {
+      const response = await fetch("/api/sendEmail", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       })
-
+  
+      const data = await response.json()
+  
       if (response.ok) {
-        setMessage("Thank you for subscribing! We'll notify you when our waste management services are available.")
+        setMessage("Thank you for subscribing! We'll notify you when we launch.")
         setEmail("")
       } else {
-        setMessage("An error occurred. Please try again.")
+        setMessage(data.error || "An error occurred. Please try again.")
       }
+    } catch (error) {
+      console.error("Request failed:", error)
+      setMessage("An unexpected error occurred. Please try again.")
     } finally {
       setLoading(false)
     }
   }
+  
 
   return (
     <section className="py-24">
@@ -72,4 +76,3 @@ export function ComingSoon() {
     </section>
   )
 }
-
