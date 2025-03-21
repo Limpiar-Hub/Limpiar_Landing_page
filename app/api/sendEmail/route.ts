@@ -55,8 +55,13 @@ CEO & Founder Limpiar`
     console.log("✅ Email sent successfully:", mailResponse)
 
     return NextResponse.json({ message: "Email sent successfully!" })
-  } catch (error: any) {
-    console.error("❌ Email sending error:", error)
-    return NextResponse.json({ error: error.message || "Failed to send email" }, { status: 500 })
+  } catch (error: unknown) { 
+    if (error instanceof Error) {
+      console.error("❌ Email sending error:", error.message);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+    console.error("❌ An unknown error occurred.");
+    return NextResponse.json({ error: "An unknown error occurred." }, { status: 500 });
   }
+  
 }
