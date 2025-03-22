@@ -21,6 +21,14 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [handleScroll])
 
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.classList.add("overflow-hidden")
+    } else {
+      document.body.classList.remove("overflow-hidden")
+    }
+  }, [isMobileMenuOpen])
+
   // Navigation items
   const menuItems = [
     { href: "/limpiador", label: "Limpiador" },
@@ -32,8 +40,8 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 z-50 w-full border-b transition-all duration-300 ${
-        scrolling ? "bg-transparent backdrop-blur-md shadow-md" : "bg-white"
+      className={`fixed top-0 z-50 w-full border-b transition-all duration-300 backdrop-blur-md ${
+        scrolling ? "bg-white/70 shadow-md" : "bg-white/90"
       }`}
     >
       <div className="container mx-auto px-4">
@@ -51,21 +59,22 @@ export function Navbar() {
               onMouseEnter={() => setIsCommerceSpacesOpen(true)}
               onMouseLeave={() => setIsCommerceSpacesOpen(false)}
             >
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1 cursor-pointer">
                 <Link
                   href="/commerce-spaces"
                   className="text-sm font-medium text-gray-700 hover:text-blue-600 transition"
                 >
                   Commerce Spaces
                 </Link>
-                <svg
-                  className={`w-4 h-4 transition-transform ${isCommerceSpacesOpen ? "rotate-180" : ""}`}
+                <motion.svg
+                  className="w-4 h-4 transition-transform"
+                  animate={{ rotate: isCommerceSpacesOpen ? 180 : 0 }}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
+                </motion.svg>
               </div>
 
               <AnimatePresence>
@@ -78,7 +87,7 @@ export function Navbar() {
                   >
                     <Link
                       href="/start-here"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition"
                     >
                       Start Here
                     </Link>
@@ -141,78 +150,50 @@ export function Navbar() {
 
         {/* Mobile Menu */}
         <AnimatePresence>
-  {isMobileMenuOpen && (
-    <motion.div
-      initial={{ opacity: 0, height: 0 }}
-      animate={{ opacity: 1, height: "100vh" }}
-      exit={{ opacity: 0, height: 0 }}
-      transition={{ duration: 0.3, ease: "easeInOut" }}
-      className="fixed inset-0 z-50 md:hidden bg-white flex flex-col w-full h-full px-6 pt-6"
-      onClick={() => setIsMobileMenuOpen(false)}
-    >
-      {/* Logo & Close Button */}
-      <div className="flex items-center justify-between w-full">
-        <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
-          <Image src="/logo.png" alt="Limpiar Logo" width={140} height={40} />
-        </Link>
-
-        {/* Animated Green Beep Indicator */}
-        <div className="relative flex items-center">
-          <motion.div
-            className="w-3 h-3 bg-green-500 rounded-full"
-            animate={{ opacity: [1, 0, 1] }}
-            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-          />
-        </div>
-      </div>
-
-      {/* Navigation Links */}
-      <nav className="flex flex-col space-y-6 text-center w-full mt-10">
-        {[
-          { href: "/commerce-spaces", label: "Commerce Spaces" },
-          { href: "/start-here", label: "Start Here" },
-          ...menuItems,
-        ].map(({ href, label, external }) => (
-          <motion.div
-            key={href}
-            whileHover={{ scale: 1.1, color: "#059669" }}
-            transition={{ duration: 0.2 }}
-          >
-            <Link
-              href={href}
-              target={external ? "_blank" : "_self"}
-              rel={external ? "noopener noreferrer" : ""}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="block text-xl font-medium text-gray-700 hover:bg-gray-100 py-3 transition rounded-lg"
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "100vh" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="fixed inset-0 z-50 md:hidden bg-white/80 backdrop-blur-md flex flex-col w-full h-full px-6 pt-6"
             >
-              {label}
-            </Link>
-          </motion.div>
-        ))}
+              {/* Close Button & Logo */}
+              <div className="flex items-center justify-between w-full">
+                <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Image src="/logo.png" alt="Limpiar Logo" width={140} height={40} />
+                </Link>
+                <Button variant="ghost" onClick={() => setIsMobileMenuOpen(false)}>
+                  ✕
+                </Button>
+              </div>
 
-        {/* Classy Get Started Button */}
-        <motion.div
-          whileHover={{ scale: 1.08, boxShadow: "0px 4px 10px rgba(218, 165, 32, 0.6)" }}
-          transition={{ duration: 0.3 }}
-          className="flex justify-center mt-4"
-        >
-          <a
-            href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-semibold transition-all transform duration-300 shadow-lg"
-            >
-            Get Started
-          </a>
-        </motion.div>
-      </nav>
-    </motion.div>
-  )}
-</AnimatePresence>
+              {/* Navigation Links */}
+              <nav className="flex flex-col space-y-6 text-center w-full mt-10">
+                {[{ href: "/commerce-spaces", label: "Commerce Spaces" }, ...menuItems].map(({ href, label, external }) => (
+                  <motion.div key={href} whileHover={{ scale: 1.1 }} transition={{ duration: 0.2 }}>
+                    <Link
+                      href={href}
+                      target={external ? "_blank" : "_self"}
+                      rel={external ? "noopener noreferrer" : ""}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block text-xl font-medium text-gray-700 hover:bg-gray-100 py-3 transition rounded-lg"
+                    >
+                      {label}
+                    </Link>
+                  </motion.div>
+                ))}
+              </nav>
 
-
-
+              {/* Get Started Button */}
+              <motion.div whileHover={{ scale: 1.08 }} transition={{ duration: 0.3 }} className="flex justify-center mt-4">
+                <a href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-semibold transition">
+                  Get Started
+                </a>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </header>
   )
