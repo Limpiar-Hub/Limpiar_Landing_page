@@ -88,7 +88,7 @@ export function Footer() {
                 <PhoneIcon className="w-5 h-5 mr-2 text-blue-400" /> (833) 546-7427
               </li>
               <li className="flex items-center text-sm text-gray-400">
-                <MapPinIcon className="w-5 h-5 mr-2 text-blue-400" /> Lagos, Nigeria
+                <MapPinIcon className="w-5 h-5 mr-2 text-blue-400" /> United States
               </li>
             </ul>
           </div>
