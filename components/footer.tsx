@@ -88,7 +88,7 @@ export function Footer() {
                 <PhoneIcon className="w-5 h-5 mr-2 text-blue-400" /> (833) 546-7427
               </li>
               <li className="flex items-center text-sm text-gray-400">
-                <MapPinIcon className="w-5 h-5 mr-2 text-blue-400" /> United States
+                <MapPinIcon className="w-5 h-5 mr-2 text-blue-400" /> Texas, United States
               </li>
             </ul>
           </div>
@@ -133,8 +133,8 @@ export function Footer() {
             title="Limpiar Location"
             className="w-full h-48 md:h-64"
             loading="lazy"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31716.992874703668!2d3.3488899999999997!3d6.5243799999999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8b28c6c5a67d%3A0xf5f1e2f1e7a418f!2sLagos!5e0!3m2!1sen!2sng!4v1619784582773!5m2!1sen!2sng"
-          ></iframe>
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11587034.717351677!2d-103.59185177510525!3d31.968598678826054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8640c1d42b3a5b3f%3A0x86c1eb45e3e125ef!2sTexas%2C%20USA!5e0!3m2!1sen!2sus!4v1711130000000!5m2!1sen!2sus"
+          />
         </div>
 
         {/* Bottom Bar */}
