@@ -7,9 +7,8 @@ import { Button } from "@/components/ui/button"
 import { AnimatePresence, motion } from "framer-motion"
 
 export function Navbar() {
-  const [isCommerceSpacesOpen, setIsCommerceSpacesOpen] = useState(false)
-  const [scrolling, setScrolling] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [scrolling, setScrolling] = useState(false)
 
   // Handle scroll effect
   const handleScroll = useCallback(() => {
@@ -22,15 +21,11 @@ export function Navbar() {
   }, [handleScroll])
 
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.classList.add("overflow-hidden")
-    } else {
-      document.body.classList.remove("overflow-hidden")
-    }
+    document.body.classList.toggle("overflow-hidden", isMobileMenuOpen)
   }, [isMobileMenuOpen])
 
-  // Navigation items
   const menuItems = [
+    { href: "/commerce-spaces", label: "Commerce Spaces" },
     { href: "/limpiador", label: "Limpiador" },
     { href: "/waste-management", label: "Waste Management" },
     { href: "/about", label: "About Us" },
@@ -44,59 +39,15 @@ export function Navbar() {
         scrolling ? "bg-white/70 shadow-md" : "bg-white/90"
       }`}
     >
-      <div className="container mx-auto px-4">
+      <div className="w-full max-w-[1280px] mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <Image src="/logo.png" alt="Limpiar Logo" width={140} height={40} className="h-8 w-auto" />
+            <Image src="/logo.png" alt="Limpiar Logo" width={140} height={40} />
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            {/* Commerce Spaces Dropdown */}
-            <div
-              className="relative group"
-              onMouseEnter={() => setIsCommerceSpacesOpen(true)}
-              onMouseLeave={() => setIsCommerceSpacesOpen(false)}
-            >
-              <div className="flex items-center gap-1 cursor-pointer">
-                <Link
-                  href="/commerce-spaces"
-                  className="text-sm font-medium text-gray-700 hover:text-blue-600 transition"
-                >
-                  Commerce Spaces
-                </Link>
-                <motion.svg
-                  className="w-4 h-4 transition-transform"
-                  animate={{ rotate: isCommerceSpacesOpen ? 180 : 0 }}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </motion.svg>
-              </div>
-
-              <AnimatePresence>
-                {isCommerceSpacesOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg"
-                  >
-                    <Link
-                      href="/start-here"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition"
-                    >
-                      Start Here
-                    </Link>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* Other Menu Items */}
             {menuItems.map(({ href, label, external }) => (
               <Link
                 key={href}
@@ -152,45 +103,35 @@ export function Navbar() {
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "100vh" }}
-              exit={{ opacity: 0, height: 0 }}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="fixed inset-0 z-50 md:hidden bg-white/80 backdrop-blur-md flex flex-col w-full h-full px-6 pt-6"
+              className="absolute top-16 left-0 w-full bg-white border-t border-gray-200 shadow-lg"
             >
-              {/* Close Button & Logo */}
-              <div className="flex items-center justify-between w-full">
-                <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
-                  <Image src="/logo.png" alt="Limpiar Logo" width={140} height={40} />
-                </Link>
-                <Button variant="ghost" onClick={() => setIsMobileMenuOpen(false)}>
-                  ✕
-                </Button>
-              </div>
-
-              {/* Navigation Links */}
-              <nav className="flex flex-col space-y-6 text-center w-full mt-10">
-                {[{ href: "/commerce-spaces", label: "Commerce Spaces" }, ...menuItems].map(({ href, label, external }) => (
+              <nav className="flex flex-col items-center w-full space-y-6 py-8">
+                {menuItems.map(({ href, label, external }) => (
                   <motion.div key={href} whileHover={{ scale: 1.1 }} transition={{ duration: 0.2 }}>
                     <Link
                       href={href}
                       target={external ? "_blank" : "_self"}
                       rel={external ? "noopener noreferrer" : ""}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="block text-xl font-medium text-gray-700 hover:bg-gray-100 py-3 transition rounded-lg"
+                      className="block text-lg font-medium text-gray-700 hover:bg-gray-100 py-2 px-4 rounded-lg transition"
                     >
                       {label}
                     </Link>
                   </motion.div>
                 ))}
-              </nav>
-
-              {/* Get Started Button */}
-              <motion.div whileHover={{ scale: 1.08 }} transition={{ duration: 0.3 }} className="flex justify-center mt-4">
-                <a href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-semibold transition">
+                <a
+                  href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full max-w-xs text-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg font-medium transition"
+                >
                   Get Started
                 </a>
-              </motion.div>
+              </nav>
             </motion.div>
           )}
         </AnimatePresence>
