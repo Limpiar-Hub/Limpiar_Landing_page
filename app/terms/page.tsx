@@ -4,8 +4,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { 
   FiCheckCircle, FiShield, FiDollarSign, FiUser, FiAlertTriangle, 
-  FiXCircle, FiRefreshCw, FiMail, FiFileText, FiLock, FiClock, 
-  FiDatabase, FiGlobe
+  FiXCircle, FiRefreshCw, FiMail,  FiLock, FiClock, 
+  FiDatabase, 
 } from "react-icons/fi";
 import { FaGavel } from "react-icons/fa";
 
