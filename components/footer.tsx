@@ -146,7 +146,9 @@ export function Footer() {
             <form onSubmit={handleSubmit} className="space-y-4">
               <Input type="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} className={`${isLightMode ? "bg-gray-200 text-black" : "bg-gray-800 text-white"}`} />
               <div className="flex items-start space-x-2">
-                <Checkbox id="newsletter-consent" />
+                <Checkbox id="newsletter-consent" 
+                        className="w-5 h-5 border border-gray-400 dark:border-white bg-white dark:bg-transparent checked:bg-blue-500 dark:checked:bg-blue-500"
+/>
                 <label htmlFor="newsletter-consent" className="text-sm text-gray-400">
                   I agree to receive marketing emails
                 </label>
