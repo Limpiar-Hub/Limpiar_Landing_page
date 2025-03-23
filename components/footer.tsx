@@ -97,17 +97,32 @@ export function Footer() {
 
           {/* Quick Links */}
           <div className="md:text-center">
-            <h3 className="font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2 md:flex md:flex-col md:items-center">
-              {["About", "Services", "Contact"].map((item) => (
-                <li key={item}>
-                  <Link href={`/${item.toLowerCase()}`} className={`text-sm ${isLightMode ? "text-gray-600 hover:text-blue-500" : "text-gray-400 hover:text-blue-400"}`}>
-                    {item}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+  <h3 className="font-semibold mb-4">Quick Links</h3>
+  <ul className="space-y-2 md:flex md:flex-col md:items-center">
+    {["About", "Social Impact"].map((item) => (
+      <li key={item}>
+        <Link
+          href={`/${item.toLowerCase().replace(" ", "-")}`} 
+          className={`text-sm ${isLightMode ? "text-gray-600 hover:text-blue-500" : "text-gray-400 hover:text-blue-400"}`}
+        >
+          {item}
+        </Link>
+      </li>
+    ))}
+    {/* Blog (External Link) */}
+    <li>
+      <a
+        href="https://blog.limpiar.online/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`text-sm ${isLightMode ? "text-gray-600 hover:text-blue-500" : "text-gray-400 hover:text-blue-400"}`}
+      >
+        Blog
+      </a>
+    </li>
+  </ul>
+</div>
+
 
           {/* Contact Info */}
           <div>
