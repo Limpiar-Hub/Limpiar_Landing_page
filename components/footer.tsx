@@ -15,7 +15,6 @@ import {
   SunIcon, 
   XMarkIcon 
 } from "@heroicons/react/24/solid"
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa"
 
 export function Footer() {
   const [email, setEmail] = useState("")
