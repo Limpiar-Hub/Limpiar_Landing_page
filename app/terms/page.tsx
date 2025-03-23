@@ -10,8 +10,8 @@ import {
 import { FaGavel } from "react-icons/fa";
 
 // Reusable Animated Card Component
-const AnimatedSection = ({ icon, title, children, color }: { icon: JSX.Element; title: string; children: React.ReactNode; color: string }) => {
-  return (
+const AnimatedSection = ({ icon, title, children, color }: { icon: React.ReactElement; title: string; children: React.ReactNode; color: string }) => {
+    return (
     <motion.section
       whileHover={{ scale: 1.05, boxShadow: "0px 10px 20px rgba(0,0,0,0.15)" }}
       transition={{ duration: 0.3 }}
