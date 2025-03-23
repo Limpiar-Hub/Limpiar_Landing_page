@@ -51,7 +51,7 @@ export function FeaturesSection() {
     <section className="bg-gradient-to-b from-blue-50 to-white py-24">
       <div className="container mx-auto px-4">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
-        <TabsList className="flex overflow-x-auto scrollbar-hide justify-start space-x-4 px-4">
+        <TabsList className="flex overflow-x-auto scrollbar-hide justify-start md:justify-center space-x-4 px-4">
   {features.map((feature) => (
     <TabsTrigger
       key={feature.id}
