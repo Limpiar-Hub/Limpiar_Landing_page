@@ -74,11 +74,15 @@ export function HeroSection() {
                 {heroSlides[currentSlide].title}
               </motion.h1>
             </AnimatePresence>
-            <Link href="https://onboarding.limpiar.online/public/onboarding">
+            <a
+              href="https://api.leadconnectorhq.com/widget/booking/4wDfQQ5L1Nar5ammxt6J?backgroundColor=%23ffffff&primaryColor=%23178af6ff&buttonText=Schedule+Meeting&showCalendarTitle=true&showCalendarDescription=true&showCalendarDetails=true&default=true"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Button size="lg" className="bg-[#4834D4] hover:bg-[#3A2BBF] text-lg px-8">
                 Get Started
               </Button>
-            </Link>
+            </a>
           </div>
         </div>
       </div>
