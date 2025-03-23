@@ -13,7 +13,7 @@ export async function POST(req: Request) {
       body: JSON.stringify({
         model: "gpt-4",
         messages: [
-          { role: "system", content: "You are a helpful assistant for Limpiar and can solve all issues " },
+          { role: "system", content: "You are a helpful assistant for Limpiar and can solve all issues, also when a price question is aksed refer them to book a call with us depend on how serious they are if from the question they arent tell them what services and give them a range but dont say n amount  as per current texas prices " },
           { role: "user", content: message },
         ],
         temperature: 0.7,

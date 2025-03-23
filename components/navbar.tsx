@@ -9,6 +9,9 @@ import { AnimatePresence, motion } from "framer-motion"
 export function Navbar() {
   const [isCommerceSpacesOpen, setIsCommerceSpacesOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+
+  const closeSheet = () => setIsSheetOpen(false);
 
   // Function to handle scroll event
   const handleScroll = () => {
@@ -100,46 +103,47 @@ export function Navbar() {
           </a>
 
           {/* Mobile Navigation */}
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden">
-                <span className="sr-only">Open menu</span>
-                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-              <nav className="flex flex-col space-y-4 mt-6">
-                <Link href="/commerce-spaces" className="text-lg font-medium text-gray-700 hover:text-blue-600">
-                  Commerce Spaces
-                </Link>
-                <Link href="/start-here" className="text-lg font-medium text-gray-700 hover:text-blue-600">
-                  Start Here
-                </Link>
-                <Link href="/limpiador" className="text-lg font-medium text-gray-700 hover:text-blue-600">
-                  Limpiador
-                </Link>
-                <Link href="/waste-management" className="text-lg font-medium text-gray-700 hover:text-blue-600">
-                  Waste Management
-                </Link>
-                <Link href="/about" className="text-lg font-medium text-gray-700 hover:text-blue-600">
-                  About Us
-                </Link>
-                <Link href="/social-impact" className="text-lg font-medium text-gray-700 hover:text-blue-600">
-                  Social Impact
-                </Link>
-                <a
-                  href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS?backgroundColor=%23ffffff&primaryColor=%23178af6ff&buttonText=Schedule+Meeting&showCalendarTitle=true&showCalendarDescription=true&showCalendarDetails=true&default=true"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hidden md:inline-flex bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium"
-                >
-                  Get Started
-                </a>
-              </nav>
-            </SheetContent>
-          </Sheet>
+          <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
+      <SheetTrigger asChild>
+        <Button variant="ghost" size="icon" className="md:hidden">
+          <span className="sr-only">Open menu</span>
+          <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </Button>
+      </SheetTrigger>
+      <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+        <nav className="flex flex-col space-y-4 mt-6">
+          <Link href="/commerce-spaces" className="text-lg font-medium text-gray-700 hover:text-blue-600" onClick={closeSheet}>
+            Commerce Spaces
+          </Link>
+          <Link href="/start-here" className="text-lg font-medium text-gray-700 hover:text-blue-600" onClick={closeSheet}>
+            Start Here
+          </Link>
+          <Link href="/limpiador" className="text-lg font-medium text-gray-700 hover:text-blue-600" onClick={closeSheet}>
+            Limpiador
+          </Link>
+          <Link href="/waste-management" className="text-lg font-medium text-gray-700 hover:text-blue-600" onClick={closeSheet}>
+            Waste Management
+          </Link>
+          <Link href="/about" className="text-lg font-medium text-gray-700 hover:text-blue-600" onClick={closeSheet}>
+            About Us
+          </Link>
+          <Link href="/social-impact" className="text-lg font-medium text-gray-700 hover:text-blue-600" onClick={closeSheet}>
+            Social Impact
+          </Link>
+          <a
+            href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS?backgroundColor=%23ffffff&primaryColor=%23178af6ff&buttonText=Schedule+Meeting&showCalendarTitle=true&showCalendarDescription=true&showCalendarDetails=true&default=true"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden md:inline-flex bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium"
+            onClick={closeSheet}
+          >
+            Get Started
+          </a>
+        </nav>
+      </SheetContent>
+    </Sheet>
         </div>
       </div>
     </header>

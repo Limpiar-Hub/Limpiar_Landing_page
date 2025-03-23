@@ -225,12 +225,13 @@ export function Footer() {
         <div className="mt-12 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
           <p className={`text-sm ${isLightMode ? "text-gray-600" : "text-gray-400"}`}>© {new Date().getFullYear()} Limpiar. All rights reserved.</p>
           <div className="flex space-x-4">
-            <Link href="/privacy" className={`text-sm ${isLightMode ? "text-gray-600 hover:text-blue-500" : "text-gray-400 hover:text-blue-400"}`}>
-              Privacy Policy
-            </Link>
-            <Link href="/terms" className={`text-sm ${isLightMode ? "text-gray-600 hover:text-blue-500" : "text-gray-400 hover:text-blue-400"}`}>
-              Terms of Service
-            </Link>
+          <Link href="/pivacy" className={`text-sm ${isLightMode ? "text-gray-600 hover:text-blue-500" : "text-gray-400 hover:text-blue-400"}`}>
+  Privacy Policy
+</Link>
+<Link href="/terms" className={`text-sm ${isLightMode ? "text-gray-600 hover:text-blue-500" : "text-gray-400 hover:text-blue-400"}`}>
+  Terms of Service
+</Link>
+
           </div>
           <button onClick={toggleTheme} className="flex items-center space-x-2 text-gray-400 hover:text-blue-400">
             {isLightMode ? <MoonIcon className="w-5 h-5" /> : <SunIcon className="w-5 h-5" />}
