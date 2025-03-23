@@ -3,14 +3,27 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 
 export function Navbar() {
   const [isCommerceSpacesOpen, setIsCommerceSpacesOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  // Function to handle scroll event
+  const handleScroll = () => {
+    setIsScrolled(window.scrollY > 0);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white">
+    <header className={`sticky top-0 z-50 w-full border-b bg-white transition-all duration-300 ${isScrolled ? "backdrop-blur-lg bg-opacity-90" : ""}`}>
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
@@ -78,13 +91,13 @@ export function Navbar() {
 
           {/* Get Started Button */}
           <a
-  href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS?backgroundColor=%23ffffff&primaryColor=%23178af6ff&buttonText=Schedule+Meeting&showCalendarTitle=true&showCalendarDescription=true&showCalendarDetails=true&default=true"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="hidden md:inline-flex bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium"
->
-  Get Started
-</a>
+            href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS?backgroundColor=%23ffffff&primaryColor=%23178af6ff&buttonText=Schedule+Meeting&showCalendarTitle=true&showCalendarDescription=true&showCalendarDetails=true&default=true"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden md:inline-flex bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium"
+          >
+            Get Started
+          </a>
 
           {/* Mobile Navigation */}
           <Sheet>
@@ -117,14 +130,13 @@ export function Navbar() {
                   Social Impact
                 </Link>
                 <a
-  href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS?backgroundColor=%23ffffff&primaryColor=%23178af6ff&buttonText=Schedule+Meeting&showCalendarTitle=true&showCalendarDescription=true&showCalendarDetails=true&default=true"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="hidden md:inline-flex bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium"
->
-  Get Started
-</a>
-
+                  href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS?backgroundColor=%23ffffff&primaryColor=%23178af6ff&buttonText=Schedule+Meeting&showCalendarTitle=true&showCalendarDescription=true&showCalendarDetails=true&default=true"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hidden md:inline-flex bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium"
+                >
+                  Get Started
+                </a>
               </nav>
             </SheetContent>
           </Sheet>
@@ -133,4 +145,3 @@ export function Navbar() {
     </header>
   )
 }
-

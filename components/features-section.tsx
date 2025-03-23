@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 
-
 const features = [
   {
     id: "transparency",
@@ -15,7 +14,6 @@ const features = [
       "Track progress, monitor performance, and ensure every job meets your standards. Our accountability dashboard gives you full transparency, so you always know who’s on-site and what’s getting done.",
     image: "/transparenc.png",
   },
-
   {
     id: "efficiency",
     title: "Smart Scheduling Assistant",
@@ -53,13 +51,19 @@ export function FeaturesSection() {
     <section className="bg-gradient-to-b from-blue-50 to-white py-24">
       <div className="container mx-auto px-4">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
-          <TabsList className="w-full justify-center">
-            {features.map((feature) => (
-              <TabsTrigger key={feature.id} value={feature.id} className="px-8 py-2.5 text-base capitalize">
-                {feature.id}
-              </TabsTrigger>
-            ))}
-          </TabsList>
+        <TabsList className="flex overflow-x-auto scrollbar-hide justify-start space-x-4 px-4">
+  {features.map((feature) => (
+    <TabsTrigger
+      key={feature.id}
+      value={feature.id}
+      className="flex-shrink-0 px-4 py-2 text-base capitalize whitespace-nowrap tabs-trigger"
+    >
+      {feature.id}
+    </TabsTrigger>
+  ))}
+</TabsList>
+
+
 
           <AnimatePresence mode="wait">
             {features.map((feature) => (
@@ -75,17 +79,16 @@ export function FeaturesSection() {
                     <h2 className="text-3xl font-bold tracking-tight">{feature.title}</h2>
                     <p className="text-gray-600 leading-relaxed">{feature.description}</p>
                     <a
-  href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS?backgroundColor=%23ffffff&primaryColor=%23178af6ff&buttonText=Schedule+Meeting&showCalendarTitle=true&showCalendarDescription=true&showCalendarDetails=true&default=true"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
-    Get Started
-  </Button>
-</a>
-
+                      href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS?backgroundColor=%23ffffff&primaryColor=%23178af6ff&buttonText=Schedule+Meeting&showCalendarTitle=true&showCalendarDescription=true&showCalendarDetails=true&default=true"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
+                        Get Started
+                      </Button>
+                    </a>
                   </div>
-                  <div className="relative h-[400px] rounded-xl overflow-hidden">
+                  <div className="relative h-64 md:h-[400px] rounded-xl overflow-hidden">
                     <Image
                       src={feature.image || "/placeholder.svg"}
                       alt={feature.title}
@@ -104,4 +107,3 @@ export function FeaturesSection() {
     </section>
   )
 }
-
