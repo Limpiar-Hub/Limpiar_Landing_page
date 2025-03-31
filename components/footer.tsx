@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState,useEffect, useRef  } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -15,6 +15,7 @@ import {
   SunIcon, 
   XMarkIcon 
 } from "@heroicons/react/24/solid"
+
 
 export function Footer() {
   const [email, setEmail] = useState("")
@@ -47,6 +48,14 @@ export function Footer() {
       console.error("Error:", error)
     }
   }
+
+  const chatContainerRef = useRef<HTMLDivElement>(null);
+
+useEffect(() => {
+  if (chatContainerRef.current) {
+    chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+  }
+}, [chatMessages]);
 
   const handleChatSubmit = async () => {
     if (!chatMessage) return;
@@ -187,56 +196,80 @@ export function Footer() {
 
         {/* Chat Box (Popup) */}
         {chatOpen && (
-          <div className={`fixed bottom-16 right-6 p-4 w-72 shadow-lg rounded-lg ${isLightMode ? "bg-white text-black" : "bg-gray-800 text-white"}`}>
-            <div className="flex justify-between items-center border-b pb-2 mb-2">
-              <h3 className="text-lg font-semibold">Live Chat</h3>
-              <button onClick={() => setChatOpen(false)}>
-                <XMarkIcon className="w-5 h-5 text-gray-600 hover:text-gray-800" />
-              </button>
-            </div>
-            
-            {/* Conversation Area */}
-            <div className="h-48 overflow-y-auto p-2">
-              <div className="flex flex-col space-y-2">
-                {chatMessages.map((msg, index) => (
-                  <div key={index} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-                    <div className={`p-2 rounded-lg max-w-xs ${msg.sender === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-300 text-black'}`}>
-                      {msg.text}
-                    </div>
-                  </div>
-                ))}
-                {/* Typing Indicator */}
-                {isTyping && (
-                  <div className="flex justify-start">
-                    <div className="flex items-center">
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce mr-1" />
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce mr-1" />
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
-                      <span className="text-gray-600 text-sm ml-2">Typing...</span>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
+  <div
+    className={`fixed bottom-16 right-6 p-4 w-80 sm:w-96 max-h-[500px] shadow-lg rounded-lg transition-all duration-300 ${
+      isLightMode ? "bg-white text-black" : "bg-gray-800 text-white"
+    }`}
+  >
+    {/* Header */}
+    <div className="flex justify-between items-center border-b pb-2 mb-2">
+      <h3 className="text-lg font-semibold">Live Chat</h3>
+      <button onClick={() => setChatOpen(false)}>
+        <XMarkIcon className="w-5 h-5 text-gray-600 hover:text-gray-800" />
+      </button>
+    </div>
 
-            {/* Input Area */}
-            <div className="flex mt-2">
-              <input
-                type="text"
-                placeholder="Type a message..."
-                value={chatMessage}
-                onChange={(e) => setChatMessage(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    handleChatSubmit();
-                  }
-                }}
-                className="p-2 w-full border rounded-md focus:outline-none focus:ring focus:ring-blue-400 text-black" // Set input text color to black
+    {/* Conversation Area */}
+    <div className="h-64 sm:h-72 overflow-y-auto p-2 space-y-2 flex flex-col"
+      ref={chatContainerRef}
+    >
+      {chatMessages.map((msg, index) => (
+        <div key={index} className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}>
+          {/* Mike's Avatar */}
+          {msg.sender === "mike" && (
+            <div className="flex items-end">
+              <img
+                src="/mike-avatar.png" // Replace with actual image path
+                alt="Mike"
+                className="w-8 h-8 rounded-full mr-2"
               />
-              <Button onClick={handleChatSubmit} className="ml-2 bg-blue-500 hover:bg-blue-600 text-white">Send</Button>
             </div>
+          )}
+          {/* Chat Bubble */}
+          <div
+            className={`p-3 rounded-lg max-w-xs ${
+              msg.sender === "user"
+                ? "bg-blue-500 text-white"
+                : "bg-gray-300 text-black"
+            }`}
+          >
+            {msg.text}
           </div>
-        )}
+        </div>
+      ))}
+
+      {/* Typing Indicator */}
+      {isTyping && (
+        <div className="flex justify-start items-center">
+          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce mr-1" />
+          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce mr-1" />
+          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
+          <span className="text-gray-600 text-sm ml-2">Typing...</span>
+        </div>
+      )}
+    </div>
+
+    {/* Input Area */}
+    <div className="flex mt-2">
+      <input
+        type="text"
+        placeholder="Type a message..."
+        value={chatMessage}
+        onChange={(e) => setChatMessage(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            handleChatSubmit();
+          }
+        }}
+        className="p-2 w-full border rounded-md focus:outline-none focus:ring focus:ring-blue-400 text-black"
+      />
+      <Button onClick={handleChatSubmit} className="ml-2 bg-blue-500 hover:bg-blue-600 text-white">
+        Send
+      </Button>
+    </div>
+  </div>
+)}
+
 
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
