@@ -117,9 +117,16 @@ export function Navbar() {
           <Link href="/commerce-spaces" className="text-lg font-medium text-gray-700 hover:text-blue-600" onClick={closeSheet}>
             Commerce Spaces
           </Link>
-          <Link href="/start-here" className="text-lg font-medium text-gray-700 hover:text-blue-600" onClick={closeSheet}>
-            Start Here
-          </Link>
+          <a
+  href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS?backgroundColor=%23ffffff&primaryColor=%23178af6ff&buttonText=Schedule+Meeting&showCalendarTitle=true&showCalendarDescription=true&showCalendarDetails=true&default=true"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="text-lg font-medium text-gray-700 hover:text-blue-600"
+  onClick={closeSheet}
+>
+  Get Started
+</a>
+
           <Link href="/limpiador" className="text-lg font-medium text-gray-700 hover:text-blue-600" onClick={closeSheet}>
             Limpiador
           </Link>
