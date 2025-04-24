@@ -1,21 +1,13 @@
-"use client"
 
-import { useState,useEffect, useRef  } from "react"
+"use client"
+import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
-import { 
-  EnvelopeIcon, 
-  PhoneIcon, 
-  MapPinIcon, 
-  ChatBubbleBottomCenterTextIcon, 
-  MoonIcon, 
-  SunIcon, 
-  XMarkIcon 
-} from "@heroicons/react/24/solid"
-
+import { EnvelopeIcon, PhoneIcon, MapPinIcon, MoonIcon, SunIcon, XMarkIcon } from "@heroicons/react/24/solid"
+import { motion, AnimatePresence } from "framer-motion"
 
 export function Footer() {
   const [email, setEmail] = useState("")
@@ -25,6 +17,14 @@ export function Footer() {
   const [chatMessage, setChatMessage] = useState("")
   const [chatMessages, setChatMessages] = useState<{ sender: string, text: string }[]>([])
   const [isTyping, setIsTyping] = useState(false)
+
+  const chatContainerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight
+    }
+  }, [chatMessages])
 
   const toggleTheme = () => setIsLightMode(!isLightMode)
 
@@ -49,28 +49,16 @@ export function Footer() {
     }
   }
 
-  const chatContainerRef = useRef<HTMLDivElement>(null);
-
-useEffect(() => {
-  if (chatContainerRef.current) {
-    chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
-  }
-}, [chatMessages]);
-
   const handleChatSubmit = async () => {
-    if (!chatMessage) return;
+    if (!chatMessage) return
 
-    // Add user message to the chat
-    setChatMessages((prev) => [...prev, { sender: 'user', text: chatMessage }]);
-    
-    // Simulate typing indicator for the assistant
-    setIsTyping(true);
+    setChatMessages((prev) => [...prev, { sender: "user", text: chatMessage }])
+    setIsTyping(true)
     setTimeout(() => {
-      // Simulate an API call to get the assistant's reply
-      fetchAssistantReply(chatMessage);
-    }, 1000); // Simulated typing delay
-    setChatMessage("");
-  };
+      fetchAssistantReply(chatMessage)
+    }, 1000)
+    setChatMessage("")
+  }
 
   const fetchAssistantReply = async (message: string) => {
     try {
@@ -78,17 +66,17 @@ useEffect(() => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message }),
-      });
+      })
 
-      const data = await response.json();
-      setChatMessages((prev) => [...prev, { sender: 'assistant', text: data.reply }]);
-      setIsTyping(false); // Stop typing indicator
+      const data = await response.json()
+      setChatMessages((prev) => [...prev, { sender: "assistant", text: data.reply }])
+      setIsTyping(false)
     } catch (error) {
-      console.error("Chat error:", error);
-      setChatMessages((prev) => [...prev, { sender: 'assistant', text: "Something went wrong. Please try again later." }]);
-      setIsTyping(false); // Stop typing indicator
+      console.error("Chat error:", error)
+      setChatMessages((prev) => [...prev, { sender: "assistant", text: "Something went wrong. Please try again later." }])
+      setIsTyping(false)
     }
-  };
+  }
 
   return (
     <footer className={`${isLightMode ? "bg-white text-black" : "bg-gray-900 text-white"} relative transition duration-300`}>
@@ -106,32 +94,30 @@ useEffect(() => {
 
           {/* Quick Links */}
           <div className="md:text-center">
-  <h3 className="font-semibold mb-4">Quick Links</h3>
-  <ul className="space-y-2 md:flex md:flex-col md:items-center">
-    {["About", "Social Impact"].map((item) => (
-      <li key={item}>
-        <Link
-          href={`/${item.toLowerCase().replace(" ", "-")}`} 
-          className={`text-sm ${isLightMode ? "text-gray-600 hover:text-blue-500" : "text-gray-400 hover:text-blue-400"}`}
-        >
-          {item}
-        </Link>
-      </li>
-    ))}
-    {/* Blog (External Link) */}
-    <li>
-      <a
-        href="https://blog.limpiar.online/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`text-sm ${isLightMode ? "text-gray-600 hover:text-blue-500" : "text-gray-400 hover:text-blue-400"}`}
-      >
-        Blog
-      </a>
-    </li>
-  </ul>
-</div>
-
+            <h3 className="font-semibold mb-4">Quick Links</h3>
+            <ul className="space-y-2 md:flex md:flex-col md:items-center">
+              {["About", "Social Impact"].map((item) => (
+                <li key={item}>
+                  <Link
+                    href={`/${item.toLowerCase().replace(" ", "-")}`}
+                    className={`text-sm ${isLightMode ? "text-gray-600 hover:text-blue-500" : "text-gray-400 hover:text-blue-400"}`}
+                  >
+                    {item}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <a
+                  href="https://blog.limpiar.online/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`text-sm ${isLightMode ? "text-gray-600 hover:text-blue-500" : "text-gray-400 hover:text-blue-400"}`}
+                >
+                  Blog
+                </a>
+              </li>
+            </ul>
+          </div>
 
           {/* Contact Info */}
           <div>
@@ -153,16 +139,25 @@ useEffect(() => {
           <div>
             <h3 className="font-semibold mb-4">Get Monthly Updates</h3>
             <form onSubmit={handleSubmit} className="space-y-4">
-              <Input type="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} className={`${isLightMode ? "bg-gray-200 text-black" : "bg-gray-800 text-white"}`} />
+              <Input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className={`${isLightMode ? "bg-gray-200 text-black" : "bg-gray-800 text-white"}`}
+              />
               <div className="flex items-start space-x-2">
-                <Checkbox id="newsletter-consent" 
-                        className="w-5 h-5 border border-gray-400 dark:border-white bg-white dark:bg-transparent checked:bg-blue-500 dark:checked:bg-blue-500"
-/>
+                <Checkbox
+                  id="newsletter-consent"
+                  className="w-5 h-5 border border-gray-400 dark:border-white bg-white dark:bg-transparent checked:bg-blue-500 dark:checked:bg-blue-500"
+                />
                 <label htmlFor="newsletter-consent" className="text-sm text-gray-400">
                   I agree to receive marketing emails
                 </label>
               </div>
-              <Button type="submit" className="w-full bg-blue-500 hover:bg-blue-600 text-white">Sign Up</Button>
+              <Button type="submit" className="w-full bg-blue-500 hover:bg-blue-600 text-white">
+                Sign Up
+              </Button>
               {successMessage && <p className="text-green-400 text-sm">{successMessage}</p>}
             </form>
           </div>
@@ -185,103 +180,172 @@ useEffect(() => {
         </div>
 
         {/* Floating Chat Button */}
-        <div className="fixed bottom-6 right-6 z-50">
+        <motion.div
+          className="fixed bottom-6 right-6 z-50"
+          whileHover={{ scale: 1.1, rotate: 5 }}
+          whileTap={{ scale: 0.95 }}
+        >
           <button
             onClick={() => setChatOpen(!chatOpen)}
-            className={`bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-full shadow-lg transition duration-300`}
+            className={`p-4 rounded-full shadow-xl transition duration-300 ${
+              isLightMode
+                ? "bg-gradient-to-br from-blue-400 to-blue-600 text-white"
+                : "bg-gradient-to-br from-blue-600 to-blue-800 text-white"
+            }`}
+            aria-label={chatOpen ? "Close chat" : "Open chat"}
           >
-            {chatOpen ? <XMarkIcon className="w-6 h-6" /> : <ChatBubbleBottomCenterTextIcon className="w-6 h-6" />}
+            {chatOpen ? (
+              <XMarkIcon className="w-6 h-6" />
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-6 h-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                <path d="M12 8v4" />
+                <circle cx="12" cy="14" r="1" />
+              </svg>
+            )}
           </button>
-        </div>
+        </motion.div>
 
         {/* Chat Box (Popup) */}
-        {chatOpen && (
-  <div
-    className={`fixed bottom-16 right-6 p-4 w-80 sm:w-96 max-h-[500px] shadow-lg rounded-lg transition-all duration-300 ${
-      isLightMode ? "bg-white text-black" : "bg-gray-800 text-white"
-    }`}
-  >
-    {/* Header */}
-    <div className="flex justify-between items-center border-b pb-2 mb-2">
-      <h3 className="text-lg font-semibold">Live Chat</h3>
-      <button onClick={() => setChatOpen(false)}>
-        <XMarkIcon className="w-5 h-5 text-gray-600 hover:text-gray-800" />
-      </button>
-    </div>
+        <AnimatePresence>
+          {chatOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 50 }}
+              className={`fixed bottom-20 right-6 w-80 sm:w-96 max-h-[600px] rounded-xl shadow-2xl overflow-hidden transition-all duration-300 ${
+                isLightMode
+                  ? "bg-white/80 backdrop-blur-md border border-gray-200"
+                  : "bg-gray-800/80 backdrop-blur-md border border-gray-700"
+              }`}
+            >
+              {/* Header */}
+              <div className={`flex justify-between items-center p-4 ${isLightMode ? "bg-gray-100/50" : "bg-gray-900/50"}`}>
+                <div className="flex items-center space-x-2">
+                  <img
+                    src="/chatbox.png"
+                    alt="Assistant Avatar"
+                    className="w-8 h-8 rounded-full object-cover"
+                  />
+                  <h3 className="text-lg font-semibold">Limpiar Assistant</h3>
+                </div>
+                <button
+                  onClick={() => setChatOpen(false)}
+                  className={`p-1 rounded-full ${isLightMode ? "hover:bg-gray-200" : "hover:bg-gray-700"}`}
+                  aria-label="Close chat"
+                >
+                  <XMarkIcon className={`w-5 h-5 ${isLightMode ? "text-gray-600" : "text-gray-300"}`} />
+                </button>
+              </div>
 
-    {/* Conversation Area */}
-    <div className="h-64 sm:h-72 overflow-y-auto p-2 space-y-2 flex flex-col"
-      ref={chatContainerRef}
-    >
-      {chatMessages.map((msg, index) => (
-        <div key={index} className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}>
-          {/* Mike's Avatar */}
-          {msg.sender === "mike" && (
-            <div className="flex items-end">
-              <img
-                src="/mike-avatar.png" // Replace with actual image path
-                alt="Mike"
-                className="w-8 h-8 rounded-full mr-2"
-              />
-            </div>
+              {/* Conversation Area */}
+              <div
+                ref={chatContainerRef}
+                className="h-72 sm:h-80 overflow-y-auto p-4 space-y-4 flex flex-col bg-gradient-to-b from-transparent to-gray-100/20"
+              >
+                {chatMessages.map((msg, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"} items-end`}
+                  >
+                    {msg.sender === "assistant" && (
+                      <img
+                        src="/chatbox.png"
+                        alt="Assistant"
+                        className="w-6 h-6 rounded-full mr-2"
+                      />
+                    )}
+                    <div
+                      className={`p-3 rounded-lg max-w-xs shadow-md ${
+                        msg.sender === "user"
+                          ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white"
+                          : "bg-gray-200/80 text-black"
+                      }`}
+                    >
+                      {msg.text}
+                    </div>
+                  </motion.div>
+                ))}
+                {isTyping && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="flex justify-start items-center space-x-2"
+                  >
+                    <div className="flex space-x-1">
+                      <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce [animation-delay:-0.3s]" />
+                      <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce [animation-delay:-0.15s]" />
+                      <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" />
+                    </div>
+                    <span className={`text-sm ${isLightMode ? "text-gray-600" : "text-gray-400"}`}>Typing...</span>
+                  </motion.div>
+                )}
+              </div>
+
+              {/* Input Area */}
+              <div className={`flex items-center p-4 ${isLightMode ? "bg-gray-100/50" : "bg-gray-900/50"}`}>
+                <Input
+                  type="text"
+                  placeholder="Type a message..."
+                  value={chatMessage}
+                  onChange={(e) => setChatMessage(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleChatSubmit()
+                  }}
+                  className={`flex-1 p-2 rounded-full border-0 focus:ring-2 focus:ring-blue-400 ${
+                    isLightMode ? "bg-white/80 text-black" : "bg-gray-700/80 text-white"
+                  }`}
+                  aria-label="Chat message input"
+                />
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={handleChatSubmit}
+                  className="ml-2 p-2 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full text-white"
+                  aria-label="Send message"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-5 h-5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <line x1="22" y1="2" x2="11" y2="13" />
+                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                  </svg>
+                </motion.button>
+              </div>
+            </motion.div>
           )}
-          {/* Chat Bubble */}
-          <div
-            className={`p-3 rounded-lg max-w-xs ${
-              msg.sender === "user"
-                ? "bg-blue-500 text-white"
-                : "bg-gray-300 text-black"
-            }`}
-          >
-            {msg.text}
-          </div>
-        </div>
-      ))}
-
-      {/* Typing Indicator */}
-      {isTyping && (
-        <div className="flex justify-start items-center">
-          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce mr-1" />
-          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce mr-1" />
-          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
-          <span className="text-gray-600 text-sm ml-2">Typing...</span>
-        </div>
-      )}
-    </div>
-
-    {/* Input Area */}
-    <div className="flex mt-2">
-      <input
-        type="text"
-        placeholder="Type a message..."
-        value={chatMessage}
-        onChange={(e) => setChatMessage(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            handleChatSubmit();
-          }
-        }}
-        className="p-2 w-full border rounded-md focus:outline-none focus:ring focus:ring-blue-400 text-black"
-      />
-      <Button onClick={handleChatSubmit} className="ml-2 bg-blue-500 hover:bg-blue-600 text-white">
-        Send
-      </Button>
-    </div>
-  </div>
-)}
-
+        </AnimatePresence>
 
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
-          <p className={`text-sm ${isLightMode ? "text-gray-600" : "text-gray-400"}`}>© {new Date().getFullYear()} Limpiar. All rights reserved.</p>
+          <p className={`text-sm ${isLightMode ? "text-gray-600" : "text-gray-400"}`}>
+            © {new Date().getFullYear()} Limpiar. All rights reserved.
+          </p>
           <div className="flex space-x-4">
-          <Link href="/pivacy" className={`text-sm ${isLightMode ? "text-gray-600 hover:text-blue-500" : "text-gray-400 hover:text-blue-400"}`}>
-  Privacy Policy
-</Link>
-<Link href="/terms" className={`text-sm ${isLightMode ? "text-gray-600 hover:text-blue-500" : "text-gray-400 hover:text-blue-400"}`}>
-  Terms of Service
-</Link>
-
+            <Link href="/privacy" className={`text-sm ${isLightMode ? "text-gray-600 hover:text-blue-500" : "text-gray-400 hover:text-blue-400"}`}>
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className={`text-sm ${isLightMode ? "text-gray-600 hover:text-blue-500" : "text-gray-400 hover:text-blue-400"}`}>
+              Terms of Service
+            </Link>
           </div>
           <button onClick={toggleTheme} className="flex items-center space-x-2 text-gray-400 hover:text-blue-400">
             {isLightMode ? <MoonIcon className="w-5 h-5" /> : <SunIcon className="w-5 h-5" />}
