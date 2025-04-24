@@ -30,9 +30,9 @@ export function Navbar() {
 
   // PDF links (replace with your actual PDF paths and names)
   const pdfs = [
-    { name: "Onboarding Documentation", path: "/pdf3.pdf" },
-    { name: "Limpiar Checklist", path: "/pdf2.pdf" },
-    { name: "Limpiador FAQs", path: "/pdf1.pdf" },
+    { name: "Onboarding Documentation", path: "/Onboarding.pdf" },
+    { name: "Limpiar Checklist", path: "/Checklist.pdf" },
+    { name: "Limpiador FAQs", path: "/FAQs.pdf" },
   ]
 
   return (
