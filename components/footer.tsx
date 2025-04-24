@@ -1,4 +1,5 @@
 "use client"
+
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
@@ -45,6 +46,7 @@ export function Footer() {
       setTimeout(() => setSuccessMessage(""), 4000)
     } catch (error) {
       console.error("Error:", error)
+      alert("Failed to subscribe. Please try again later.")
     }
   }
 
@@ -67,6 +69,8 @@ export function Footer() {
         body: JSON.stringify({ message }),
       })
 
+      if (!response.ok) throw new Error("Failed to fetch assistant reply")
+
       const data = await response.json()
       setChatMessages((prev) => [...prev, { sender: "assistant", text: data.reply }])
       setIsTyping(false)
@@ -76,6 +80,12 @@ export function Footer() {
       setIsTyping(false)
     }
   }
+
+  const initialFAQs = [
+    { question: "How do I book a cleaner?", answer: "You can book a cleaner directly through our website by selecting your preferred date and time." },
+    { question: "What areas do you serve?", answer: "We currently serve Dallas, Texas, and surrounding areas. Contact us for specific locations!" },
+    { question: "Can I cancel a booking?", answer: "Yes, you can cancel a booking up to 24 hours in advance through your account or by contacting support." },
+  ]
 
   return (
     <footer className={`${isLightMode ? "bg-white text-black" : "bg-gray-900 text-white"} relative transition duration-300`}>
@@ -222,7 +232,7 @@ export function Footer() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className={`fixed bottom-0 right-0 w-80 sm:w-96 max-h-[500px] rounded-tl-lg rounded-tr-lg shadow-2xl overflow-hidden z-40 mr-6 mb-20 ${
+              className={`fixed bottom-0 right-0 w-80 sm:w-96 max-h-[500px] rounded-tl-lg rounded-tr-lg shadow-2xl overflow-hidden z-40 mr-6 mb-20 flex flex-col ${
                 isLightMode
                   ? "bg-white/80 backdrop-blur-md border border-gray-200"
                   : "bg-gray-800/80 backdrop-blur-md border border-gray-700"
@@ -260,8 +270,25 @@ export function Footer() {
               {/* Conversation Area */}
               <div
                 ref={chatContainerRef}
-                className="flex-1 overflow-y-auto p-4 space-y-4 flex flex-col bg-gradient-to-b from-transparent to-gray-100/20"
+                className="flex-1 min-h-0 max-h-[400px] overflow-y-auto p-4 space-y-4 flex flex-col bg-gradient-to-b from-transparent to-gray-100/20"
+                style={{ scrollbarWidth: 'thin' }}
               >
+                {chatMessages.length === 0 && (
+                  <div className="space-y-4">
+                    <p className={`text-sm font-medium ${isLightMode ? "text-gray-800" : "text-gray-200"}`}>
+                      Welcome! Ask me anything or select a question below:
+                    </p>
+                    {initialFAQs.map((faq, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setChatMessage(faq.question)}
+                        className={`block text-left text-sm ${isLightMode ? "text-blue-500 hover:text-blue-600 bg-gray-100 p-2 rounded" : "text-blue-400 hover:text-blue-500 bg-gray-700 p-2 rounded"} hover:underline w-full`}
+                      >
+                        {faq.question}
+                      </button>
+                    ))}
+                  </div>
+                )}
                 {chatMessages.map((msg, index) => (
                   <motion.div
                     key={index}
@@ -304,7 +331,7 @@ export function Footer() {
               </div>
 
               {/* Input Area */}
-              <div className={`flex items-center p-4 ${isLightMode ? "bg-gray-100/50" : "bg-gray-900/50"}`}>
+              <div className={`flex items-center p-4 ${isLightMode ? "bg-gray-100/50" : "bg-gray-900/50"} sticky bottom-0`}>
                 <Input
                   type="text"
                   placeholder="Type a message..."
