@@ -1,4 +1,3 @@
-
 "use client"
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
@@ -6,7 +5,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
-import { EnvelopeIcon, PhoneIcon, MapPinIcon, MoonIcon, SunIcon, XMarkIcon } from "@heroicons/react/24/solid"
+import { EnvelopeIcon, PhoneIcon, MapPinIcon, MoonIcon, SunIcon, XMarkIcon, CheckCircleIcon } from "@heroicons/react/24/solid"
 import { motion, AnimatePresence } from "framer-motion"
 
 export function Footer() {
@@ -215,18 +214,21 @@ export function Footer() {
           </button>
         </motion.div>
 
-        {/* Chat Box (Popup) */}
+        {/* Chat Box (Compact Window like MongoDB) */}
         <AnimatePresence>
           {chatOpen && (
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 50 }}
-              className={`fixed bottom-20 right-6 w-80 sm:w-96 max-h-[600px] rounded-xl shadow-2xl overflow-hidden transition-all duration-300 ${
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              className={`fixed bottom-0 right-0 w-80 sm:w-96 max-h-[500px] rounded-tl-lg rounded-tr-lg shadow-2xl overflow-hidden z-40 mr-6 mb-20 ${
                 isLightMode
                   ? "bg-white/80 backdrop-blur-md border border-gray-200"
                   : "bg-gray-800/80 backdrop-blur-md border border-gray-700"
               }`}
+              role="dialog"
+              aria-label="Live chat with Limpiar Assistant"
             >
               {/* Header */}
               <div className={`flex justify-between items-center p-4 ${isLightMode ? "bg-gray-100/50" : "bg-gray-900/50"}`}>
@@ -247,10 +249,18 @@ export function Footer() {
                 </button>
               </div>
 
+              {/* Status Indicator */}
+              <div className="px-4 pb-2">
+                <div className={`flex items-center space-x-1 text-sm ${isLightMode ? "text-gray-600" : "text-gray-400"}`}>
+                  <CheckCircleIcon className="w-4 h-4 text-green-500" />
+                  <span>Status: All Systems Operational</span>
+                </div>
+              </div>
+
               {/* Conversation Area */}
               <div
                 ref={chatContainerRef}
-                className="h-72 sm:h-80 overflow-y-auto p-4 space-y-4 flex flex-col bg-gradient-to-b from-transparent to-gray-100/20"
+                className="flex-1 overflow-y-auto p-4 space-y-4 flex flex-col bg-gradient-to-b from-transparent to-gray-100/20"
               >
                 {chatMessages.map((msg, index) => (
                   <motion.div
