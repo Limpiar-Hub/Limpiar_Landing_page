@@ -1,5 +1,5 @@
-
 "use client"
+
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -9,26 +9,22 @@ import { AnimatePresence, motion } from "framer-motion"
 
 export function Navbar() {
   const [isCommerceSpacesOpen, setIsCommerceSpacesOpen] = useState(false)
-  const [isResourcesOpen, setIsResourcesOpen] = useState(false)
-  const [isMobileResourcesOpen, setIsMobileResourcesOpen] = useState(false)
+  const [isLimpiadorOpen, setIsLimpiadorOpen] = useState(false)
+  const [isMobileLimpiadorOpen, setIsMobileLimpiadorOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isSheetOpen, setIsSheetOpen] = useState(false)
 
   const closeSheet = () => setIsSheetOpen(false)
 
-  // Function to handle scroll event
   const handleScroll = () => {
     setIsScrolled(window.scrollY > 0)
   }
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll)
-    return () => {
-      window.removeEventListener("scroll", handleScroll)
-    }
+    return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // PDF links (replace with your actual PDF paths and names)
   const pdfs = [
     { name: "Onboarding Documentation", path: "/Onboarding.pdf" },
     { name: "Limpiar Checklist", path: "/Checklist.pdf" },
@@ -48,7 +44,7 @@ export function Navbar() {
           </Link>
 
           <nav className="hidden md:flex items-center space-x-8">
-            {/* Commerce Spaces with Dropdown */}
+            {/* Commerce Spaces */}
             <div
               className="relative group"
               onMouseEnter={() => setIsCommerceSpacesOpen(true)}
@@ -75,7 +71,6 @@ export function Navbar() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     className="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg"
-                    onMouseEnter={() => setIsCommerceSpacesOpen(true)}
                   >
                     <Link
                       href="/start-here"
@@ -88,32 +83,18 @@ export function Navbar() {
               </AnimatePresence>
             </div>
 
-            {/* Rest of navigation links */}
-            <Link href="/limpiador" className="text-sm font-medium text-gray-700 hover:text-blue-600">
-              Limpiador
-            </Link>
-            <Link href="/waste-management" className="text-sm font-medium text-gray-700 hover:text-blue-600">
-              Waste Management
-            </Link>
-            <Link href="/about" className="text-sm font-medium text-gray-700 hover:text-blue-600">
-              About Us
-            </Link>
-            <Link href="/social-impact" className="text-sm font-medium text-gray-700 hover:text-blue-600">
-              Social Impact
-            </Link>
-
-            {/* Resources with Dropdown */}
+            {/* Limpiador with PDF Dropdown */}
             <div
               className="relative group"
-              onMouseEnter={() => setIsResourcesOpen(true)}
-              onMouseLeave={() => setIsResourcesOpen(false)}
+              onMouseEnter={() => setIsLimpiadorOpen(true)}
+              onMouseLeave={() => setIsLimpiadorOpen(false)}
             >
               <div className="flex items-center gap-1">
-                <span className="text-sm font-medium text-gray-700 hover:text-blue-600 cursor-pointer">
-                  Resources
-                </span>
+                <Link href="/limpiador" className="text-sm font-medium text-gray-700 hover:text-blue-600">
+                  Limpiador
+                </Link>
                 <svg
-                  className={`w-4 h-4 transition-transform ${isResourcesOpen ? "rotate-180" : ""}`}
+                  className={`w-4 h-4 transition-transform ${isLimpiadorOpen ? "rotate-180" : ""}`}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -123,13 +104,12 @@ export function Navbar() {
               </div>
 
               <AnimatePresence>
-                {isResourcesOpen && (
+                {isLimpiadorOpen && (
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg"
-                    onMouseEnter={() => setIsResourcesOpen(true)}
+                    className="absolute left-0 mt-2 w-56 bg-white border border-gray-200 rounded-lg shadow-lg"
                   >
                     {pdfs.map((pdf, index) => (
                       <a
@@ -147,6 +127,15 @@ export function Navbar() {
               </AnimatePresence>
             </div>
 
+            <Link href="/waste-management" className="text-sm font-medium text-gray-700 hover:text-blue-600">
+              Waste Management
+            </Link>
+            <Link href="/about" className="text-sm font-medium text-gray-700 hover:text-blue-600">
+              About Us
+            </Link>
+            <Link href="/social-impact" className="text-sm font-medium text-gray-700 hover:text-blue-600">
+              Social Impact
+            </Link>
             <Link href="https://blog.limpiar.online/" className="text-sm font-medium text-gray-700 hover:text-blue-600">
               Blog
             </Link>
@@ -154,7 +143,7 @@ export function Navbar() {
 
           {/* Get Started Button */}
           <a
-            href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS?backgroundColor=%23ffffff&primaryColor=%23178af6ff&buttonText=Schedule+Meeting&showCalendarTitle=true&showCalendarDescription=true&showCalendarDetails=true&default=true"
+            href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden md:inline-flex bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium"
@@ -162,11 +151,10 @@ export function Navbar() {
             Get Started
           </a>
 
-          {/* Mobile Navigation */}
+          {/* Mobile Sheet */}
           <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden">
-                <span className="sr-only">Open menu</span>
                 <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
@@ -174,54 +162,28 @@ export function Navbar() {
             </SheetTrigger>
             <SheetContent side="right" className="w-[300px] sm:w-[400px]">
               <nav className="flex flex-col space-y-4 mt-6">
-                <Link
-                  href="/commerce-spaces"
-                  className="text-lg font-medium text-gray-700 hover:text-blue-600"
-                  onClick={closeSheet}
-                >
+                <Link href="/commerce-spaces" onClick={closeSheet} className="text-lg text-gray-700 hover:text-blue-600">
                   Commerce Spaces
                 </Link>
                 <a
-                  href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS?backgroundColor=%23ffffff&primaryColor=%23178af6ff&buttonText=Schedule+Meeting&showCalendarTitle=true&showCalendarDescription=true&showCalendarDetails=true&default=true"
+                  href="https://api.leadconnectorhq.com/widget/booking/N59Uzph3F1P9QB1CfZLS"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-lg font-medium text-gray-700 hover:text-blue-600"
                   onClick={closeSheet}
+                  className="text-lg text-gray-700 hover:text-blue-600"
                 >
                   Get Started
                 </a>
-                <Link href="/limpiador" className="text-lg font-medium text-gray-700 hover:text-blue-600" onClick={closeSheet}>
-                  Limpiador
-                </Link>
-                <Link
-                  href="/waste-management"
-                  className="text-lg font-medium text-gray-700 hover:text-blue-600"
-                  onClick={closeSheet}
-                >
-                  Waste Management
-                </Link>
-                <Link href="/about" className="text-lg font-medium text-gray-700 hover:text-blue-600" onClick={closeSheet}>
-                  About Us
-                </Link>
-                <Link
-                  href="/social-impact"
-                  className="text-lg font-medium text-gray-700 hover:text-blue-600"
-                  onClick={closeSheet}
-                >
-                  Social Impact
-                </Link>
-                {/* Resources in Mobile Navigation */}
+
+                {/* Mobile Limpiador with PDF dropdown */}
                 <div className="flex flex-col">
                   <button
-                    type="button"
-                    onClick={() => setIsMobileResourcesOpen(!isMobileResourcesOpen)}
-                    className="flex items-center gap-2 text-lg font-medium text-gray-700 hover:text-blue-600 focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
-                    aria-expanded={isMobileResourcesOpen}
-                    aria-controls="resources-submenu"
+                    onClick={() => setIsMobileLimpiadorOpen(!isMobileLimpiadorOpen)}
+                    className="flex items-center justify-between text-lg font-medium text-gray-700 hover:text-blue-600"
                   >
-                    Resources
+                    Limpiador
                     <svg
-                      className={`w-4 h-4 transition-transform ${isMobileResourcesOpen ? "rotate-180" : ""}`}
+                      className={`w-4 h-4 transition-transform ${isMobileLimpiadorOpen ? "rotate-180" : ""}`}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -230,23 +192,24 @@ export function Navbar() {
                     </svg>
                   </button>
                   <AnimatePresence>
-                    {isMobileResourcesOpen && (
+                    {isMobileLimpiadorOpen && (
                       <motion.div
-                        id="resources-submenu"
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="ml-4 flex flex-col space-y-2 mt-2"
+                        className="ml-4 mt-2 flex flex-col space-y-2"
                       >
+                        <Link href="/limpiador" onClick={closeSheet} className="text-base text-gray-600 hover:text-blue-600">
+                          Go to Limpiador
+                        </Link>
                         {pdfs.map((pdf, index) => (
                           <a
                             key={index}
                             href={pdf.path}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-base text-gray-600 hover:text-blue-600"
                             onClick={closeSheet}
+                            className="text-base text-gray-600 hover:text-blue-600"
                           >
                             {pdf.name}
                           </a>
@@ -255,10 +218,20 @@ export function Navbar() {
                     )}
                   </AnimatePresence>
                 </div>
+
+                <Link href="/waste-management" onClick={closeSheet} className="text-lg text-gray-700 hover:text-blue-600">
+                  Waste Management
+                </Link>
+                <Link href="/about" onClick={closeSheet} className="text-lg text-gray-700 hover:text-blue-600">
+                  About Us
+                </Link>
+                <Link href="/social-impact" onClick={closeSheet} className="text-lg text-gray-700 hover:text-blue-600">
+                  Social Impact
+                </Link>
                 <Link
                   href="https://blog.limpiar.online/"
-                  className="text-lg font-medium text-gray-700 hover:text-blue-600"
                   onClick={closeSheet}
+                  className="text-lg text-gray-700 hover:text-blue-600"
                 >
                   Blog
                 </Link>
