@@ -26,9 +26,11 @@ export default function CommercialPage() {
             transition={{ duration: 0.8 }}
             className="text-white max-w-3xl"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">Modern Commercial Spaces</h1>
-            <p className="text-lg md:text-xl">
-              Discover premium skyscraper offices, shared workspaces, and dynamic business hubs.
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 font-poppins tracking-tight">
+              Modern Commercial Spaces
+            </h1>
+            <p className="text-lg md:text-xl font-light font-poppins">
+              Professional, reliable, and spotless cleaning solutions for offices, buildings, and corporate spaces.
             </p>
           </motion.div>
         </div>
@@ -36,7 +38,7 @@ export default function CommercialPage() {
 
       {/* Features */}
       <section className="py-16 px-4 md:px-20 bg-gray-50">
-        <h2 className="text-3xl font-bold text-center mb-12">Why Choose Our Spaces?</h2>
+        <h2 className="text-3xl font-bold text-center mb-12 font-poppins">Why Businesses Choose Limpiar</h2>
         <div className="grid md:grid-cols-3 gap-12 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -45,9 +47,9 @@ export default function CommercialPage() {
             transition={{ delay: 0.1 }}
             className="p-6 bg-white shadow rounded-xl"
           >
-            <Building2 className="mx-auto w-12 h-12 text-blue-600 mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Premium Architecture</h3>
-            <p>Skyscrapers built with modern design, smart access, and eco-conscious materials.</p>
+            <Sparkle className="mx-auto w-12 h-12 text-blue-600 mb-4" />
+            <h3 className="text-xl font-semibold mb-2 font-poppins">Spotless Results</h3>
+            <p>We ensure every workspace shines—impressing clients and supporting healthy teams.</p>
           </motion.div>
 
           <motion.div
@@ -58,8 +60,8 @@ export default function CommercialPage() {
             className="p-6 bg-white shadow rounded-xl"
           >
             <MapPin className="mx-auto w-12 h-12 text-blue-600 mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Central Locations</h3>
-            <p>Offices located in key business districts with great transit options.</p>
+            <h3 className="text-xl font-semibold mb-2 font-poppins">Local Expertise</h3>
+            <p>Serving prime commercial hubs with responsive, on-time, and dedicated teams.</p>
           </motion.div>
 
           <motion.div
@@ -69,16 +71,16 @@ export default function CommercialPage() {
             transition={{ delay: 0.3 }}
             className="p-6 bg-white shadow rounded-xl"
           >
-            <Sparkle className="mx-auto w-12 h-12 text-blue-600 mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Modern Amenities</h3>
-            <p>Wi-Fi, green spaces, lounges, and 24/7 access to meet modern business needs.</p>
+            <Building2 className="mx-auto w-12 h-12 text-blue-600 mb-4" />
+            <h3 className="text-xl font-semibold mb-2 font-poppins">Tailored Plans</h3>
+            <p>From daily to deep cleans, we customize services for your building’s exact needs.</p>
           </motion.div>
         </div>
       </section>
 
       {/* Gallery Section */}
       <section className="py-16 px-4 md:px-20">
-        <h2 className="text-3xl font-bold text-center mb-12">Explore Our Buildings</h2>
+        <h2 className="text-3xl font-bold text-center mb-12 font-poppins">Our Commercial Workspaces</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {galleryImages.map((img, index) => (
             <motion.div
@@ -86,7 +88,11 @@ export default function CommercialPage() {
               whileHover={{ scale: 1.03 }}
               className="overflow-hidden rounded-lg shadow-lg"
             >
-              <img src={img} alt={`Building ${index + 1}`} className="w-full h-64 object-cover" />
+              <img
+                src={img}
+                alt={`Commercial cleaning ${index + 1}`}
+                className="w-full h-64 object-cover"
+              />
             </motion.div>
           ))}
         </div>
