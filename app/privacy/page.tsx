@@ -378,7 +378,7 @@ export default function PrivacyPolicy() {
               <ul className="pl-6 mt-2 space-y-2">
                 {[
                   "(a) By post, using the postal address given above;",
-                  "(b) Using <a href=\"mailto:hello@limpiar.online\" class=\"text-blue-500\">hello@limpiar.online</a> to open a ticket;",
+                  "(b) Using <a href=\"mailto:helpdesk@uselimpiar.online\" class=\"text-blue-500\">helpdesk@limpiar.online</a> to open a ticket;",
                   "(c) By telephone on +1650-585-0880 or",
                   "(d) By email, using <a href=\"mailto:legal@limpiar.online\" class=\"text-blue-500\">legal@limpiar.online</a> for legal questions and <a href=\"mailto:support@limpiar.online\" class=\"text-blue-500\">support@limpiar.online</a> for Support.",
                 ].map((item, idx) => (
