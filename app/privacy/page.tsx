@@ -380,7 +380,7 @@ export default function PrivacyPolicy() {
                   "(a) By post, using the postal address given above;",
                   "(b) Using <a href=\"mailto:helpdesk@uselimpiar.online\" class=\"text-blue-500\">helpdesk@limpiar.online</a> to open a ticket;",
                   "(c) By telephone on +1650-585-0880 or",
-                  "(d) By email, using <a href=\"mailto:legal@limpiar.online\" class=\"text-blue-500\">legal@limpiar.online</a> for legal questions and <a href=\"mailto:helpdesk@limpiar.online\" class=\"text-blue-500\">support@limpiar.online</a> for Support.",
+                  "(d) By email, using <a href=\"mailto:legal@limpiar.online\" class=\"text-blue-500\">legal@limpiar.online</a> for legal questions and <a href=\"mailto:helpdesk@limpiar.online\" class=\"text-blue-500\">helpdeskt@limpiar.online</a> for Support.",
                 ].map((item, idx) => (
                   <li key={idx} className="flex items-start gap-2">
                     <FiCheck className="text-black mt-1" />
