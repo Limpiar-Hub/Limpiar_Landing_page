@@ -4,8 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  FiMail, FiUser, FiCreditCard, FiGlobe, FiShield, FiShare2, FiLock, FiUserCheck,
-  FiAlertCircle, FiUsers, FiSettings, FiClock, FiInfo, FiChevronDown, FiArrowUp, FiArrowLeft, FiCheck,
+  FiMail, FiUser, FiGlobe, FiShield, FiShare2, FiLock, FiUserCheck,
+  FiUsers, FiSettings, FiClock, FiInfo, FiChevronDown, FiArrowUp, FiArrowLeft, FiCheck,
 } from "react-icons/fi";
 
 export default function PrivacyPolicy() {
