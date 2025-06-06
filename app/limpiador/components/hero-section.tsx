@@ -74,7 +74,7 @@ export function HeroSection() {
               </motion.h1>
             </AnimatePresence>
             <a
-              href="https://api.leadconnectorhq.com/widget/booking/4wDfQQ5L1Nar5ammxt6J?backgroundColor=%23ffffff&primaryColor=%23178af6ff&buttonText=Schedule+Meeting&showCalendarTitle=true&showCalendarDescription=true&showCalendarDetails=true&default=true"
+              href="https://cleaning-business.limpiar.online/partner/sign-up"
               target="_blank"
               rel="noopener noreferrer"
             >
