@@ -47,7 +47,7 @@ export function ServicesSection() {
               >
                 <div className="relative h-[400px] rounded-xl overflow-hidden">
                   <Image
-                    src="/logo.png"
+                    src="/limpiar-logo2.png"
                     alt="Office cleaning"
                     fill
                     className="object-cover"

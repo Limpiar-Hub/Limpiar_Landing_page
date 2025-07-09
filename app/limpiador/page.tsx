@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description: "Join our network of cleaning professionals and unlock new opportunities for business growth.",
     images: [
       {
-        url: "/logo.png",
+        url: "/limp23.png",
         width: 1200,
         height: 630,
       },

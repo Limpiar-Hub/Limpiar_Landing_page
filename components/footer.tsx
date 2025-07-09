@@ -90,16 +90,23 @@ export function Footer() {
   return (
     <footer className={`${isLightMode ? "bg-white text-black" : "bg-gray-900 text-white"} relative transition duration-300`}>
       <div className="container mx-auto px-6 py-12">
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {/* Company Info */}
-          <div className="space-y-4">
-            <Link href="/">
-              <Image src="/logo.png" alt="Limpiar Logo" width={140} height={50} className="h-10 w-auto" />
-            </Link>
-            <p className={`text-sm ${isLightMode ? "text-gray-600" : "text-gray-400"}`}>
-              Professional cleaning services that care for your space and the environment.
-            </p>
-          </div>
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+  {/* Company Info */}
+  <div className="space-y-2 -mt-7">
+  <Link href="/">
+    <Image
+      src={isLightMode ? "/limp23.png" : "/limpiar-logo2.png"}
+      alt="Limpiar Logo"
+      width={140}
+      height={90}
+      className="h-20 w-auto object-contain"
+    />
+  </Link>
+  <p className={`text-sm ${isLightMode ? "text-gray-600" : "text-gray-400"}`}>
+    Professional cleaning services that care for your space and the environment.
+  </p>
+</div>
+
 
           {/* Quick Links */}
           <div className="md:text-center">

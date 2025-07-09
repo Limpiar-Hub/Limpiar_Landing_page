@@ -40,7 +40,14 @@ export function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
-            <Image src="/logo.png" alt="Limpiar Logo" width={140} height={40} className="h-8 w-auto" />
+          <Image
+  src="/limp23.png"
+  alt="Limpiar Logo"
+  width={200}
+  height={60}
+  className="h-20 w-auto object-contain"
+/>
+
           </Link>
 
           <nav className="hidden md:flex items-center space-x-8">

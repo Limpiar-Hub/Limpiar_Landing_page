@@ -8,17 +8,17 @@ const partnerships = [
   {
     title: "Job Training Programs",
     description: "Providing professional development and skills training to community members.",
-    image: "/logo.png",
+    image: "/limpiar-logo2.png",
   },
   {
     title: "Environmental Initiatives",
     description: "Supporting local environmental conservation and sustainability projects.",
-    image: "/logo.png",
+    image: "/limpiar-logo2.png",
   },
   {
     title: "Community Outreach",
     description: "Engaging with local organizations to create positive social impact.",
-    image: "/logo.png",
+    image: "/limpiar-logo2.png",
   },
 ]
 

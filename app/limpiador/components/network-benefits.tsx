@@ -45,7 +45,7 @@ export function NetworkBenefits() {
             transition={{ duration: 0.3, delay: 0.5 }}
             className="bg-white rounded-lg p-4 flex items-center justify-center"
           >
-            <Image src="/logo.png" alt="Limpiar Logo" width={100} height={40} className="h-8 w-auto" />
+            <Image src="/limp23.png" alt="Limpiar Logo" width={100} height={40} className="h-30 w-auto" />
           </motion.div>
         </div>
       </div>

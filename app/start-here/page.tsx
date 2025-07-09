@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     description: "Discover the benefits of partnering with Limpiador and maximize your property's value.",
     images: [
       {
-        url: "/logo.png",
+        url: "/limpiar-logo.png",
         width: 1200,
         height: 630,
       },

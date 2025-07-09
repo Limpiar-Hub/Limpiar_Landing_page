@@ -118,7 +118,7 @@ export function LimpiarAdvantage() {
           className="flex justify-center mt-16"
         >
           <div className="relative w-32 h-32 rounded-full bg-white shadow-lg p-4 flex items-center justify-center">
-            <Image src="/logo.png" alt="Limpiar Logo" width={80} height={80} className="object-contain" />
+            <Image src="/limp23.png" alt="Limpiar Logo" width={80} height={80} className="object-contain h-25 w-auto" />
           </div>
         </motion.div>
       </div>
