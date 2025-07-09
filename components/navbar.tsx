@@ -39,13 +39,13 @@ export function Navbar() {
     >
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
+          <Link href="/" className="flex items-center space-x-2 block -ml-12"> 
           <Image
   src="/limp23.png"
   alt="Limpiar Logo"
   width={200}
   height={60}
-  className="h-20 w-auto object-contain"
+  className="h-[140px] w-auto object-contain"
 />
 
           </Link>

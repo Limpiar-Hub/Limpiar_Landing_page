@@ -92,17 +92,17 @@ export function Footer() {
       <div className="container mx-auto px-6 py-12">
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
   {/* Company Info */}
-  <div className="space-y-1 -mt-7 text-left">
-  <Link href="/" className="block -ml-7"> {/* 👈 move logo left */}
+  <div className=" -mt-7 text-left">
+  <Link href="/" className="block -ml-14"> {/* 👈 move logo left */}
     <Image
       src={isLightMode ? "/limp23.png" : "/limpiar-logo2.png"}
       alt="Limpiar Logo"
       width={140}
       height={90}
-      className="h-20 w-auto object-contain"
+      className="h-[140px] w-auto object-contain"
     />
   </Link>
-  <p className={`text-sm ${isLightMode ? "text-gray-600" : "text-gray-400"}`}>
+  <p className={`text-sm  -mt-7 ${isLightMode ? "text-gray-600" : "text-gray-400"}`}>
     Professional cleaning services that care for your space and the environment.
   </p>
 </div>
