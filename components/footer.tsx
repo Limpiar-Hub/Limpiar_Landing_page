@@ -92,8 +92,8 @@ export function Footer() {
       <div className="container mx-auto px-6 py-12">
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
   {/* Company Info */}
-  <div className="space-y-2 -mt-7">
-  <Link href="/">
+  <div className="space-y-1 -mt-7 text-left">
+  <Link href="/" className="block -ml-7"> {/* 👈 move logo left */}
     <Image
       src={isLightMode ? "/limp23.png" : "/limpiar-logo2.png"}
       alt="Limpiar Logo"
@@ -106,6 +106,7 @@ export function Footer() {
     Professional cleaning services that care for your space and the environment.
   </p>
 </div>
+
 
 
           {/* Quick Links */}
