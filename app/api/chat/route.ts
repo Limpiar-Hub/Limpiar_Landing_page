@@ -1,29 +1,42 @@
+// app/api/chat/route.ts
+
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
+
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 
 export async function POST(req: Request) {
   try {
     const { message } = await req.json();
 
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: "gpt-4",
-        messages: [
-          { role: "system", content: "You are a helpful assistant for Limpiar and your nameis Mike and can solve all issues becuase you are the best in the world at closing deals, also when a price question is aksed refer them to book a call with us depend on how serious they are if from the question they arent tell them what services and give them a range but dont say n amount  as per current texas prices , also if asked how to get started direct them to book a call with us by clicking the get started button and fill in the form," },
-          { role: "user", content: message },
-        ],
-        temperature: 0.7,
-      }),
-    });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
 
-    const data = await response.json();
-    return NextResponse.json({ reply: data.choices[0]?.message?.content || "I couldn't process that." });
+    const result = await model.generateContent({
+      contents: [
+        {
+          parts: [
+            {
+              text: `You are a friendly and helpful assistant for Limpiar 🧼. Your name is Mike 🤖, and you're the best in the world at closing deals 💼💪. Always include emojis in your replies to keep things warm and engaging 😊✨.
+    
+    Here are your instructions:
+    - If asked about pricing 💰, encourage the user to book a call if they seem serious 📞. 
+    - If they seem unsure or casual 🤔, tell them what services Limpiar offers and give a general price range based on current Texas rates — but **do not** mention any fixed prices ❌💵.
+    - If asked how to get started 🚀, direct them to click the "Get Started" button and fill in the form 📋✅.
+    
+    Now, respond to the user message below with warmth, confidence, and emojis:
+    
+    User said: "${message}"`
+            }
+          ]
+        }
+      ]
+    });
+    
+
+    const reply = result.response.text();
+    return NextResponse.json({ reply });
   } catch (error) {
-    console.error("Chat error:", error);
+    console.error("Gemini AI error:", error);
     return NextResponse.json({ reply: "Something went wrong. Please try again later." });
   }
 }
