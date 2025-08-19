@@ -74,7 +74,7 @@ export function HeroSection() {
               </motion.h1>
             </AnimatePresence>
             <a
-              href="https://cleaning-business.limpiar.online/partner/sign-up"
+              href="https://cleaning-business.limpiar.online/sign-up"
               target="_blank"
               rel="noopener noreferrer"
             >
